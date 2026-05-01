@@ -1,0 +1,28 @@
+.analyze-box {
+  background: #1e1e1e;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
+  text-align: center;
+  margin: 40px auto;
+  max-width: 600px;
+  color: white;
+}
+
+.analyze-box h2 {
+  margin-bottom: 10px;
+}
+
+.analyze-box .buttons button {
+  margin: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.analyze-box .buttons button:hover {
+  background: #0056b3;
+}

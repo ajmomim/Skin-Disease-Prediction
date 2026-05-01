@@ -1,0 +1,58 @@
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  color: #fff;
+  text-align: left;
+  padding: 40px;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.hero-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.menu-icon {
+  font-size: 2rem;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin: 15px 0;
+  white-space: nowrap; /* ✅ Forces text in one line */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hero-buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  margin-right: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
