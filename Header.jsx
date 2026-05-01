@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 
 export default function App() {
@@ -167,12 +168,12 @@ export default function App() {
           font-weight: 700;
           margin-bottom: 2rem;
           text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-          text-align: left;
+          text-align: center; /* <-- This is the updated line */
         }
         
         .process-steps {
             display: flex;
-            justify-content: space-between;
+            gap: 3rem; 
             width: 100%;
             margin-bottom: 2rem;
         }
@@ -430,7 +431,7 @@ export default function App() {
           transition={{ duration: 1 }}
           className="header-content"
         >
-          <h1>Check your skin!</h1>
+          <h1>Steps to check your skin!</h1>
           
           <div className="process-steps">
             <div className="process-step">
@@ -451,10 +452,8 @@ export default function App() {
               <div className="step-icon step-3">
                 <span className="step-number">3</span>
               </div>
-              <p className="step-description">Get a personalized PDF report</p>
+              <p className="step-description">Provides disease name and info.</p>
             </div>
-            
-            
           </div>
           
           <div className="skin-sample-container">
@@ -468,14 +467,12 @@ export default function App() {
             <p className="sample-description">Take a clear, well-lit photo with more details about your skin</p>
           </div>
           
-          <button className="get-result-btn" onClick={() => navigate('/results')}>GET INSTANT RESULT</button>
+
+          <button className="get-result-btn" onClick={() => navigate('/predict-disease')}>GET INSTANT RESULT</button>
           
           <p className="disclaimer">* The scan result is not a diagnosis. To obtain an accurate diagnosis and a recommendation for treatment - consult your doctor.</p>
         </motion.div>
       </div>
-
-
     </div>
   );
 }
-

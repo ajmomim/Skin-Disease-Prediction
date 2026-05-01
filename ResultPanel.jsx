@@ -1,14 +1,26 @@
 // src/components/ResultPanel.jsx
 import React from "react";
 import {
-  Box, Typography, Avatar, Card, CardContent, Chip,
-  Accordion, AccordionSummary, AccordionDetails,
-  LinearProgress, Grid, Alert, Skeleton
+  Box, Typography,
+  Avatar, 
+  Card, 
+  CardContent, 
+  Chip,
+  Accordion, 
+  AccordionSummary, 
+  AccordionDetails,
+  LinearProgress, 
+  Grid, 
+  Alert, 
+  Skeleton, 
+  Stack, 
+  Divider
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { DISEASE_INFO } from "../data/diseaseInfo";
 import { ALIAS_TO_NAME } from "../data/aliases";
 import ConfidenceBar from "./ConfidenceBar";
+import SafeImg from "./SafeImg";
 
 function riskColor(pct) {         // pct = 0..100
   if (pct >= 80) return "error";
@@ -44,8 +56,11 @@ export default function ResultPanel({ preview, result, loading }) {
 
       {result && !loading && (
         <Box sx={{ mt: 2 }}>
-          <Card sx={{ mb: 2 }}>
+          <Card sx={{ mb: 2, overflow: "hidden", borderRadius: 2, boxShadow: "0 8px 24px rgba(2,6,23,0.12)" }}>
             <CardContent>
+              {mappedKey && (
+                <Typography variant="subtitle1" sx={{ fontWeight: 800, mb: 0.5 }}>{mappedKey}</Typography>
+              )}
               <Typography variant="h6" gutterBottom color="primary">AI Analysis</Typography>
 
               <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
@@ -100,18 +115,47 @@ export default function ResultPanel({ preview, result, loading }) {
             </CardContent>
           </Card>
 
-          <Accordion defaultExpanded>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="subtitle1">Disease Information</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>{info?.description || "No description available"}</Typography>
-              <Typography variant="subtitle2" gutterBottom sx={{ mt: 1 }}>Treatment</Typography>
-              <Typography>{info?.treatment || "No treatment info available"}</Typography>
-              <Typography variant="subtitle2" gutterBottom sx={{ mt: 1 }}>Prevention</Typography>
-              <Typography>{info?.prevention || "No prevention info available"}</Typography>
-            </AccordionDetails>
-          </Accordion>
+          <Card variant="outlined" sx={{ borderRadius: 3, background: "linear-gradient(180deg,#ffffff, #f9fbff)" }}>
+            <CardContent>
+              <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>About this condition</Typography>
+              <Typography sx={{ mb: 2 }}>{info?.description || "No description available"}</Typography>
+
+              <Grid container spacing={2}>
+                {Array.isArray(info?.symptoms) && (
+                  <Grid item xs={12} md={6}>
+                    <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1 }}>Common symptoms</Typography>
+                    <Stack direction="row" flexWrap="wrap" gap={1}>
+                      {info.symptoms.map((s, i) => (
+                        <Chip key={i} label={s} variant="outlined" sx={{ bgcolor: "#eef2ff" }} />
+                      ))}
+                    </Stack>
+                  </Grid>
+                )}
+                {Array.isArray(info?.risk_factors) && (
+                  <Grid item xs={12} md={6}>
+                    <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1 }}>Risk factors</Typography>
+                    <Stack direction="row" flexWrap="wrap" gap={1}>
+                      {info.risk_factors.map((s, i) => (
+                        <Chip key={i} label={s} color="warning" variant="outlined" sx={{ bgcolor: "#fff7ed" }} />
+                      ))}
+                    </Stack>
+                  </Grid>
+                )}
+              </Grid>
+
+              <Divider sx={{ my: 2 }} />
+              <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>Treatment</Typography>
+              <Typography sx={{ mb: 1 }}>{info?.treatment || "No treatment info available"}</Typography>
+              <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>Prevention</Typography>
+              <Typography sx={{ mb: 1 }}>{info?.prevention || "No prevention info available"}</Typography>
+              {info?.when_to_see_doctor && (
+                <>
+                  <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>When to seek medical care</Typography>
+                  <Typography>{info.when_to_see_doctor}</Typography>
+                </>
+              )}
+            </CardContent>
+          </Card>
 
           <Alert severity="info" sx={{ mt: 2 }}>
             <strong>Disclaimer:</strong> This AI analysis is for educational purposes only. Please consult a qualified dermatologist.

@@ -1,5 +1,6 @@
 .header-container {
           background-color: #0d1a26;
+          /* This line sets the background image and adds a dark overlay */
           background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/header-bg.jpg');
           background-size: cover;
           background-position: center;
